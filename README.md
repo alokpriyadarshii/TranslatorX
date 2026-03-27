@@ -23,7 +23,7 @@ TranslatorX is a Flutter voice translation app built for face to face conversati
 - **Dependency Injection:** get_it + injectable
 - **Local Storage:** hive + hive_flutter
 - **Speech Recognition:** speech_to_text
-- **Text-to-Speech:** flutter_tts
+- **Text to Speech:** flutter_tts
 - **Translation:** translator_plus
 - **Connectivity Check:** internet_connection_checker
 
@@ -90,7 +90,7 @@ flutter run -d <device-id>
 2. Tap the microphone for either speaker.
 3. Speak into the device.
 4. The app converts speech to text, translates it, and shows both the original and translated text.
-5. If auto-play is enabled, the translated result is spoken aloud automatically.
+5. If auto play is enabled, the translated result is spoken aloud automatically.
 
 ## Configuration Notes
 
