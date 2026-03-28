@@ -113,7 +113,3 @@ The project depends on packages such as:
 - `country_flags`
 - `internet_connection_checker`
 - `avatar_glow`
-
-## Notes
-
-This archive already contains generated folders such as `build/`, `.dart_tool/`, and platform specific files. For a cleaner repository, these are usually excluded from version control unless intentionally included.
