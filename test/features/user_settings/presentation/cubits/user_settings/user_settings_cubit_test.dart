@@ -1,6 +1,7 @@
 // Package imports:
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 // Project imports:
 import 'package:translatorx/constants/enums.dart';
