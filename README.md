@@ -2,8 +2,16 @@
 
 TranslatorX is a Flutter voice translation app built for face to face conversations between two people who speak different languages. It combines speech recognition, text translation, text to speech playback, and a split screen interface so both speakers can communicate more naturally in real time.
 
-## Features
+## Preview
 
+<p align="center">
+  <img src="images/Screenshot 2026-05-23 at 1.57.12ΓÇ»PM.png" alt="TranslatorX Preview 1" width="250" />
+  <img src="images/Screenshot 2026-05-23 at 1.57.37ΓÇ»PM.png" alt="TranslatorX Preview 2" width="250" />
+  <img src="images/Screenshot 2026-05-23 at 1.58.00ΓÇ»PM.png" alt="TranslatorX Preview 3" width="250" />
+</p>
+
+
+## Features
 - Split screen conversation UI for two users
 - Voice to text input using the microphone
 - Real time translation between selected languages
