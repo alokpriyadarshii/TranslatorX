@@ -22,10 +22,7 @@ import 'package:translatorx/utils/di.dart';
 class VoiceRecorder extends StatefulWidget {
   final User currentUser;
 
-  const VoiceRecorder({
-    super.key,
-    required this.currentUser,
-  });
+  const VoiceRecorder({super.key, required this.currentUser});
 
   @override
   State<VoiceRecorder> createState() => _VoiceRecorderState();
@@ -56,8 +53,10 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
       }
     }
 
-    final String requestedLanguage =
-        requestedLocale.split('_').first.toLowerCase();
+    final String requestedLanguage = requestedLocale
+        .split('_')
+        .first
+        .toLowerCase();
 
     for (final locale in _availableLocales) {
       if (locale.localeId.toLowerCase().startsWith(requestedLanguage)) {
@@ -77,14 +76,15 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
     if (hasPermission) {
       if (!context.mounted) return;
       context.read<VoiceRecordCubit>().setRecordingStatus(
-            recordingUser: widget.currentUser == User.host
-                ? RecordingUser.host
-                : RecordingUser.guest,
-          );
+        recordingUser: widget.currentUser == User.host
+            ? RecordingUser.host
+            : RecordingUser.guest,
+      );
     }
 
-    final String requestedLocale =
-        widget.currentUser == User.host ? sourceLanguage : targetLanguage;
+    final String requestedLocale = widget.currentUser == User.host
+        ? sourceLanguage
+        : targetLanguage;
 
     await _speechToText.listen(
       onResult: _onSpeechResult,
@@ -114,36 +114,40 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
     await Future.delayed(const Duration(seconds: 1));
     if (!context.mounted) return;
     context.read<VoiceRecordCubit>().setRecordingStatus(
-          recordingUser: RecordingUser.none,
-        );
+      recordingUser: RecordingUser.none,
+    );
 
     final languagePickerCubit = context.read<LanguagePickerCubit>();
 
-    final String currentLocale =
-        widget.currentUser == User.host ? sourceLanguage : targetLanguage;
-    final String oppositeLocale =
-        widget.currentUser == User.host ? targetLanguage : sourceLanguage;
+    final String currentLocale = widget.currentUser == User.host
+        ? sourceLanguage
+        : targetLanguage;
+    final String oppositeLocale = widget.currentUser == User.host
+        ? targetLanguage
+        : sourceLanguage;
 
     if (!context.mounted) return;
     if (_lastWords.isEmpty) {
       context.read<VoiceRecordCubit>().displayErrorMessage(
-            sourceLanguage: languagePickerCubit.getTranslationCode(currentLocale),
-            userSpeaking: widget.currentUser,
-          );
+        sourceLanguage: languagePickerCubit.getTranslationCode(currentLocale),
+        userSpeaking: widget.currentUser,
+      );
     } else {
       await context.read<VoiceRecordCubit>().updateSpeechText(
-            text: _lastWords,
-            sourceLanguage: languagePickerCubit.getTranslationCode(currentLocale),
-            targetLanguage: languagePickerCubit.getTranslationCode(oppositeLocale),
-            userSpeaking: widget.currentUser,
-          );
+        text: _lastWords,
+        sourceLanguage: languagePickerCubit.getTranslationCode(currentLocale),
+        targetLanguage: languagePickerCubit.getTranslationCode(oppositeLocale),
+        userSpeaking: widget.currentUser,
+      );
       if (isAutoPlay) {
         final FlutterTts ftts = FlutterTts();
         final translator = GoogleTranslator();
         await ftts.setPitch(1);
         await ftts.setVolume(1.0);
         await ftts.setSpeechRate(0.5);
-        await ftts.setLanguage(oppositeLocale);
+        await ftts.setLanguage(
+          languagePickerCubit.getTextToSpeechLocale(oppositeLocale),
+        );
 
         final translation = await translator.translate(
           _lastWords,
@@ -168,11 +172,11 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
                   builder: (context, userSettingsState) {
                     final voiceRecordCubit = getIt<VoiceRecordCubit>();
 
-                    final bool isMicrophoneAvailable =
-                        voiceRecordCubit.isMicrophoneAvailable(
-                      currentUser: widget.currentUser,
-                      recordingUser: voiceRecordState.recordingUser,
-                    );
+                    final bool isMicrophoneAvailable = voiceRecordCubit
+                        .isMicrophoneAvailable(
+                          currentUser: widget.currentUser,
+                          recordingUser: voiceRecordState.recordingUser,
+                        );
 
                     final bool shouldAnimate = voiceRecordCubit.shouldAnimate(
                       userSettingsState: userSettingsState,

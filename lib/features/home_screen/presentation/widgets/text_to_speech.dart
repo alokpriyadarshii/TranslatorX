@@ -48,14 +48,18 @@ class TextToSpeech extends StatelessWidget {
                   ),
                   onTap: () async {
                     if (voiceRecordState is VoiceRecordInitial) {
+                      final languagePickerCubit = context
+                          .read<LanguagePickerCubit>();
                       final FlutterTts ftts = FlutterTts();
                       await ftts.setPitch(1);
                       await ftts.setVolume(1.0);
                       await ftts.setSpeechRate(speechSpeed);
                       await ftts.setLanguage(
-                        userScreen == User.host
-                            ? languagePickerState.sourceLanguage
-                            : languagePickerState.targetLanguage,
+                        languagePickerCubit.getTextToSpeechLocale(
+                          userScreen == User.host
+                              ? languagePickerState.sourceLanguage
+                              : languagePickerState.targetLanguage,
+                        ),
                       );
 
                       await ftts.speak(

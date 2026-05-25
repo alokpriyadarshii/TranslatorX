@@ -676,8 +676,9 @@ class LanguagePickerCubit extends Cubit<LanguagePickerState> {
     required String targetLanguage,
     required String sourceLanguage,
   }) {
-    final String omittedLocale =
-        isSelectingSourceLng ? targetLanguage : sourceLanguage;
+    final String omittedLocale = isSelectingSourceLng
+        ? targetLanguage
+        : sourceLanguage;
 
     return languages
         .where((language) => language.localeCode != omittedLocale)
@@ -710,5 +711,9 @@ class LanguagePickerCubit extends Cubit<LanguagePickerState> {
 
   String getSpeechLocale(String localeCode) {
     return getLanguageOption(localeCode).localeCode;
+  }
+
+  String getTextToSpeechLocale(String localeCode) {
+    return getLanguageOption(localeCode).localeCode.replaceAll('_', '-');
   }
 }

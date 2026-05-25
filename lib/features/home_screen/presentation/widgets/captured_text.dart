@@ -53,20 +53,20 @@ class CapturedText extends StatelessWidget {
       required String targetLanguage,
     }) async {
       final languagePickerCubit = currentContext.read<LanguagePickerCubit>();
-      final String sourceTranslationCode =
-          languagePickerCubit.getTranslationCode(sourceLanguage);
-      final String targetTranslationCode =
-          languagePickerCubit.getTranslationCode(targetLanguage);
+      final String sourceTranslationCode = languagePickerCubit
+          .getTranslationCode(sourceLanguage);
+      final String targetTranslationCode = languagePickerCubit
+          .getTranslationCode(targetLanguage);
 
       if (text.isEmpty) {
         currentContext.read<VoiceRecordCubit>().setInitialState();
       } else {
         await currentContext.read<VoiceRecordCubit>().updateSpeechText(
-              text: text,
-              sourceLanguage: sourceTranslationCode,
-              targetLanguage: targetTranslationCode,
-              userSpeaking: userSpeaking,
-            );
+          text: text,
+          sourceLanguage: sourceTranslationCode,
+          targetLanguage: targetTranslationCode,
+          userSpeaking: userSpeaking,
+        );
 
         final translation = await translator.translate(
           text,
@@ -78,7 +78,9 @@ class CapturedText extends StatelessWidget {
         await ftts.setPitch(1);
         await ftts.setVolume(1.0);
         await ftts.setSpeechRate(0.5);
-        await ftts.setLanguage(targetLanguage);
+        await ftts.setLanguage(
+          languagePickerCubit.getTextToSpeechLocale(targetLanguage),
+        );
         await ftts.speak(translation.text);
       }
     }
@@ -111,7 +113,8 @@ class CapturedText extends StatelessWidget {
                             controller: TextEditingController()
                               ..text = displayInitialText()
                               ..selection = TextSelection.collapsed(
-                                  offset: displayInitialText().length),
+                                offset: displayInitialText().length,
+                              ),
                             keyboardType: TextInputType.text,
                             textCapitalization: TextCapitalization.sentences,
                             maxLines: 7,
@@ -135,7 +138,8 @@ class CapturedText extends StatelessWidget {
                               );
                             },
                             style: TextStyle(
-                              fontSize: context
+                              fontSize:
+                                  context
                                       .read<UserSettingsCubit>()
                                       .getFontSize() +
                                   1,
