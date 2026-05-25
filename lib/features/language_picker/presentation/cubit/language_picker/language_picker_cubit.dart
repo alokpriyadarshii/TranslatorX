@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:translatorx/features/language_picker/domain/models/language_model.dart';
 import 'package:translatorx/features/language_picker/domain/models/language_option.dart';
 import 'package:translatorx/features/language_picker/domain/repositories/language_picker_repository.dart';
+import 'package:translatorx/utils/text_to_speech_helper.dart';
 
 part 'language_picker_state.dart';
 
@@ -676,9 +677,8 @@ class LanguagePickerCubit extends Cubit<LanguagePickerState> {
     required String targetLanguage,
     required String sourceLanguage,
   }) {
-    final String omittedLocale = isSelectingSourceLng
-        ? targetLanguage
-        : sourceLanguage;
+    final String omittedLocale =
+        isSelectingSourceLng ? targetLanguage : sourceLanguage;
 
     return languages
         .where((language) => language.localeCode != omittedLocale)
@@ -714,6 +714,7 @@ class LanguagePickerCubit extends Cubit<LanguagePickerState> {
   }
 
   String getTextToSpeechLocale(String localeCode) {
-    return getLanguageOption(localeCode).localeCode.replaceAll('_', '-');
+    return TextToSpeechHelper.formatLocale(
+        getLanguageOption(localeCode).localeCode);
   }
 }

@@ -16,6 +16,7 @@ import 'package:translatorx/features/language_picker/presentation/cubit/language
 import 'package:translatorx/features/user_settings/presentation/cubits/user_settings/user_settings_cubit.dart';
 import 'package:translatorx/features/voice_record/presentation/cubits/voice_record/voice_record_cubit.dart';
 import 'package:translatorx/utils/di.dart';
+import 'package:translatorx/utils/text_to_speech_helper.dart';
 
 class CapturedText extends StatelessWidget {
   final String speechText;
@@ -53,20 +54,20 @@ class CapturedText extends StatelessWidget {
       required String targetLanguage,
     }) async {
       final languagePickerCubit = currentContext.read<LanguagePickerCubit>();
-      final String sourceTranslationCode = languagePickerCubit
-          .getTranslationCode(sourceLanguage);
-      final String targetTranslationCode = languagePickerCubit
-          .getTranslationCode(targetLanguage);
+      final String sourceTranslationCode =
+          languagePickerCubit.getTranslationCode(sourceLanguage);
+      final String targetTranslationCode =
+          languagePickerCubit.getTranslationCode(targetLanguage);
 
       if (text.isEmpty) {
         currentContext.read<VoiceRecordCubit>().setInitialState();
       } else {
         await currentContext.read<VoiceRecordCubit>().updateSpeechText(
-          text: text,
-          sourceLanguage: sourceTranslationCode,
-          targetLanguage: targetTranslationCode,
-          userSpeaking: userSpeaking,
-        );
+              text: text,
+              sourceLanguage: sourceTranslationCode,
+              targetLanguage: targetTranslationCode,
+              userSpeaking: userSpeaking,
+            );
 
         final translation = await translator.translate(
           text,
@@ -75,11 +76,10 @@ class CapturedText extends StatelessWidget {
         );
 
         final FlutterTts ftts = FlutterTts();
-        await ftts.setPitch(1);
-        await ftts.setVolume(1.0);
-        await ftts.setSpeechRate(0.5);
-        await ftts.setLanguage(
-          languagePickerCubit.getTextToSpeechLocale(targetLanguage),
+        await TextToSpeechHelper.configure(
+          flutterTts: ftts,
+          localeCode: targetLanguage,
+          speechRate: 0.5,
         );
         await ftts.speak(translation.text);
       }
@@ -138,8 +138,7 @@ class CapturedText extends StatelessWidget {
                               );
                             },
                             style: TextStyle(
-                              fontSize:
-                                  context
+                              fontSize: context
                                       .read<UserSettingsCubit>()
                                       .getFontSize() +
                                   1,

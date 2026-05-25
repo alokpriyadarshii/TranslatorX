@@ -11,6 +11,7 @@ import 'package:translatorx/features/home_screen/presentation/cubit/home_screen_
 import 'package:translatorx/features/language_picker/presentation/cubit/language_picker/language_picker_cubit.dart';
 import 'package:translatorx/features/voice_record/presentation/cubits/voice_record/voice_record_cubit.dart';
 import 'package:translatorx/utils/di.dart';
+import 'package:translatorx/utils/text_to_speech_helper.dart';
 
 class TextToSpeech extends StatelessWidget {
   final User userScreen;
@@ -48,18 +49,13 @@ class TextToSpeech extends StatelessWidget {
                   ),
                   onTap: () async {
                     if (voiceRecordState is VoiceRecordInitial) {
-                      final languagePickerCubit = context
-                          .read<LanguagePickerCubit>();
                       final FlutterTts ftts = FlutterTts();
-                      await ftts.setPitch(1);
-                      await ftts.setVolume(1.0);
-                      await ftts.setSpeechRate(speechSpeed);
-                      await ftts.setLanguage(
-                        languagePickerCubit.getTextToSpeechLocale(
-                          userScreen == User.host
-                              ? languagePickerState.sourceLanguage
-                              : languagePickerState.targetLanguage,
-                        ),
+                      await TextToSpeechHelper.configure(
+                        flutterTts: ftts,
+                        localeCode: userScreen == User.host
+                            ? languagePickerState.sourceLanguage
+                            : languagePickerState.targetLanguage,
+                        speechRate: speechSpeed,
                       );
 
                       await ftts.speak(
