@@ -141,11 +141,6 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
       if (isAutoPlay) {
         final FlutterTts ftts = FlutterTts();
         final translator = GoogleTranslator();
-        await TextToSpeechHelper.configure(
-          flutterTts: ftts,
-          localeCode: oppositeLocale,
-          speechRate: 0.5,
-        );
 
         final translation = await translator.translate(
           _lastWords,
@@ -153,7 +148,12 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
           to: languagePickerCubit.getTranslationCode(oppositeLocale),
         );
 
-        await ftts.speak(translation.text);
+        await TextToSpeechHelper.speak(
+          flutterTts: ftts,
+          text: translation.text,
+          localeCode: oppositeLocale,
+          speechRate: 0.5,
+        );
       }
     }
   }

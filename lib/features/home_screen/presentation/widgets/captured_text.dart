@@ -76,12 +76,12 @@ class CapturedText extends StatelessWidget {
         );
 
         final FlutterTts ftts = FlutterTts();
-        await TextToSpeechHelper.configure(
+        await TextToSpeechHelper.speak(
           flutterTts: ftts,
+          text: translation.text,
           localeCode: targetLanguage,
           speechRate: 0.5,
         );
-        await ftts.speak(translation.text);
       }
     }
 

@@ -11,6 +11,12 @@ void main() {
       expect(TextToSpeechHelper.formatLocale('en_US'), 'en-US');
     });
 
+    test('uses web audio fallback for Hindi.', () {
+      expect(TextToSpeechHelper.shouldUseWebAudioFallback('hi_IN'), isTrue);
+      expect(TextToSpeechHelper.shouldUseWebAudioFallback('hi-IN'), isTrue);
+      expect(TextToSpeechHelper.shouldUseWebAudioFallback('en_US'), isFalse);
+    });
+
     test('selects an exact voice locale match.', () {
       final voice = TextToSpeechHelper.selectVoiceForLocale(
         [

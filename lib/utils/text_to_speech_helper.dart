@@ -1,11 +1,48 @@
 // Package imports:
 import 'package:flutter_tts/flutter_tts.dart';
 
+// Project imports:
+import 'package:translatorx/utils/web_text_to_speech_player.dart';
+
 class TextToSpeechHelper {
   const TextToSpeechHelper._();
 
   static String formatLocale(String localeCode) {
     return localeCode.replaceAll('_', '-');
+  }
+
+  static bool shouldUseWebAudioFallback(String localeCode) {
+    return formatLocale(localeCode).toLowerCase().split('-').first == 'hi';
+  }
+
+  static Future<void> speak({
+    required FlutterTts flutterTts,
+    required String text,
+    required String localeCode,
+    required double speechRate,
+  }) async {
+    if (text.trim().isEmpty) {
+      return;
+    }
+
+    final String locale = formatLocale(localeCode);
+    if (shouldUseWebAudioFallback(locale)) {
+      final bool didSpeak = await playWebTextToSpeech(
+        text: text,
+        languageCode: locale,
+        speechRate: speechRate,
+      );
+      if (didSpeak) {
+        return;
+      }
+    }
+
+    await configure(
+      flutterTts: flutterTts,
+      localeCode: locale,
+      speechRate: speechRate,
+    );
+    await flutterTts.speak(text);
   }
 
   static Future<void> configure({

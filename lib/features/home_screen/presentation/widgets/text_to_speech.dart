@@ -50,19 +50,16 @@ class TextToSpeech extends StatelessWidget {
                   onTap: () async {
                     if (voiceRecordState is VoiceRecordInitial) {
                       final FlutterTts ftts = FlutterTts();
-                      await TextToSpeechHelper.configure(
+                      await TextToSpeechHelper.speak(
                         flutterTts: ftts,
+                        text: getIt<HomeScreenCubit>().getTextToSpeak(
+                          voiceRecordState: voiceRecordState,
+                          userScreen: userScreen,
+                        ),
                         localeCode: userScreen == User.host
                             ? languagePickerState.sourceLanguage
                             : languagePickerState.targetLanguage,
                         speechRate: speechSpeed,
-                      );
-
-                      await ftts.speak(
-                        getIt<HomeScreenCubit>().getTextToSpeak(
-                          voiceRecordState: voiceRecordState,
-                          userScreen: userScreen,
-                        ),
                       );
                     }
                   },
