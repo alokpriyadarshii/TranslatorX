@@ -9,4 +9,4 @@ export PATH="$PATH:$(pwd)/flutter/bin"
 
 flutter config --enable-web
 flutter pub get
-flutter build web --release
+flutter build web --release --base-href=/ --no-wasm-dry-run
