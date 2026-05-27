@@ -23,30 +23,140 @@ TranslatorX is a Flutter voice translation app built for face to face conversati
 
 ## Tech Stack
 
-- **Framework:** Flutter
-- **Language:** Dart
-- **State Management:** flutter_bloc / Cubit
-- **Dependency Injection:** get_it + injectable
-- **Local Storage:** hive + hive_flutter
-- **Speech Recognition:** speech_to_text
-- **Text to Speech:** flutter_tts
-- **Translation:** translator_plus
-- **Connectivity Check:** internet_connection_checker
+| Category | Technology |
+| --- | --- |
+| Framework | Flutter |
+| Programming Language | Dart |
+| Dart SDK | >=3.1.0 <4.0.0 |
+| State Management | flutter_bloc / Cubit |
+| Dependency Injection | get_it, injectable |
+| Local Storage | Hive, hive_flutter |
+| Speech Recognition | speech_to_text |
+| Text-to-Speech | flutter_tts |
+| Translation | translator_plus |
+| Connectivity Check | internet_connection_checker |
+| Localization | Flutter Localizations, ARB, l10n.yaml |
+| UI / Effects | avatar_glow, country_flags |
+| Testing | flutter_test, bloc_test, mocktail |
+| Code Quality | flutter_lints, analysis_options.yaml |
+| Build Tools | build_runner, injectable_generator |
+| App Icons | flutter_launcher_icons |
+| Splash Screen | flutter_native_splash |
+| Platforms | Android, iOS, Web, macOS, Linux, Windows |
+| Web Deployment | Vercel |
+| Package Manager | pub / pubspec.yaml |
 
 ## Project Structure
 
 ```text
-lib/
-├── constants/
-├── features/
-│   ├── home_screen/
-│   ├── language_picker/
-│   ├── user_settings/
-│   └── voice_record/
-├── utils/
-│   ├── di.dart
-│   └── l10n/
-└── main.dart
+TranslatorX/
+├── .vscode/
+├── android/
+│   ├── app/
+│   │   └── src/
+│   │       └── main/
+│   │           ├── AndroidManifest.xml
+│   │           ├── kotlin/
+│   │           │   └── com/
+│   │           │       └── example/
+│   │           │           └── translatorx/
+│   │           │               └── MainActivity.kt
+│   │           └── res/
+│   ├── build.gradle
+│   ├── gradle/
+│   ├── gradle.properties
+│   └── settings.gradle
+├── assets/
+│   ├── logo.png
+│   ├── splash.png
+│   └── turtle.png
+├── images/
+│   ├── Screenshot 2026-05-23 at 1.57.12 PM.png
+│   ├── Screenshot 2026-05-23 at 1.57.37 PM.png
+│   └── Screenshot 2026-05-23 at 1.58.00 PM.png
+├── ios/
+│   ├── Flutter/
+│   ├── Runner/
+│   ├── Runner.xcodeproj/
+│   ├── Runner.xcworkspace/
+│   ├── RunnerTests/
+│   └── Podfile
+├── lib/
+│   ├── constants/
+│   │   ├── enums.dart
+│   │   └── extensions.dart
+│   ├── features/
+│   │   ├── home_screen/
+│   │   │   ├── home_screen.dart
+│   │   │   └── presentation/
+│   │   │       ├── cubit/
+│   │   │       └── widgets/
+│   │   ├── language_picker/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
+│   │   ├── user_settings/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
+│   │   └── voice_record/
+│   │       └── presentation/
+│   │           ├── cubits/
+│   │           └── widgets/
+│   ├── utils/
+│   │   ├── di.dart
+│   │   ├── di.config.dart
+│   │   ├── l10n/
+│   │   │   ├── app_en.arb
+│   │   │   ├── app_pl.arb
+│   │   │   ├── localization.dart
+│   │   │   └── translations/
+│   │   ├── text_to_speech_helper.dart
+│   │   ├── web_text_to_speech_player.dart
+│   │   ├── web_text_to_speech_player_stub.dart
+│   │   └── web_text_to_speech_player_web.dart
+│   └── main.dart
+├── linux/
+│   ├── CMakeLists.txt
+│   ├── flutter/
+│   ├── main.cc
+│   ├── my_application.cc
+│   └── my_application.h
+├── macos/
+│   ├── Flutter/
+│   ├── Runner/
+│   ├── Runner.xcodeproj/
+│   ├── Runner.xcworkspace/
+│   ├── RunnerTests/
+│   ├── Podfile
+│   └── Podfile.lock
+├── test/
+│   ├── features/
+│   │   ├── language_picker/
+│   │   ├── user_settings/
+│   │   └── voice_record/
+│   └── utils/
+│       └── text_to_speech_helper_test.dart
+├── web/
+│   ├── favicon.png
+│   ├── icons/
+│   ├── index.html
+│   ├── manifest.json
+│   └── splash/
+├── windows/
+│   ├── CMakeLists.txt
+│   ├── flutter/
+│   └── runner/
+├── .gitignore
+├── .metadata
+├── analysis_options.yaml
+├── l10n.yaml
+├── license
+├── pubspec.lock
+├── pubspec.yaml
+├── README.md
+├── vercel-build.sh
+└── vercel.json
 ```
 
 ## Supported Platforms
