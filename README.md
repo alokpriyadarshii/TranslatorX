@@ -72,9 +72,10 @@ TranslatorX/
 │   ├── splash.png
 │   └── turtle.png
 ├── images/
-│   ├── Screenshot 2026-05-23 at 1.57.12 PM.png
-│   ├── Screenshot 2026-05-23 at 1.57.37 PM.png
-│   └── Screenshot 2026-05-23 at 1.58.00 PM.png
+│   ├── preview-1.png
+│   ├── preview-2.png
+│   └── preview-3.png
+│   └── preview-4.png
 ├── ios/
 │   ├── Flutter/
 │   ├── Runner/
