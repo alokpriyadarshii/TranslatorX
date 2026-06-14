@@ -4,10 +4,10 @@ TranslatorX is a Flutter voice translation app built for face to face conversati
 
 ## Preview
 
-  <img src="images/Screenshot 2026-05-23 at 1.57.10ΓÇ»PM.png" alt="TranslatorX Preview 1" width="100%" />
-  <img src="images/Screenshot 2026-05-23 at 1.57.12ΓÇ»PM.png" alt="TranslatorX Preview 2" width="100%" />
-  <img src="images/Screenshot 2026-05-23 at 1.57.37ΓÇ»PM.png" alt="TranslatorX Preview 3" width="100%" />
-  <img src="images/Screenshot 2026-05-23 at 1.58.00ΓÇ»PM.png" alt="TranslatorX Preview 4" width="100%" />
+  <img src="images/preview-1.png" alt="TranslatorX Preview 1" width="100%" />
+  <img src="images/preview-2.png" alt="TranslatorX Preview 2" width="100%" />
+  <img src="images/preview-3.png" alt="TranslatorX Preview 3" width="100%" />
+  <img src="images/preview-4.png" alt="TranslatorX Preview 4" width="100%" />
 
 
 ## Features
